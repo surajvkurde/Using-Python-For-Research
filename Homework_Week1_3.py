@@ -70,3 +70,40 @@ ranges = [max(x)-min(x) for x in Y]
 print(ranges) #The range decreases, because the average smooths a larger number of neighbors. 
 #Because the numbers in the original list are just random, we expect the average of many of them to be 
 #roughly 1 / 2, and more averaging means more smoothness in this value.
+
+
+
+
+
+
+Code for Upated Questions
+import random
+
+random.seed(1) #Initialize the basic random number generator.
+
+def moving_window_average(x, n_neighbors=1):
+    n = len(x)
+    width = n_neighbors*2 + 1
+    x = [x[0]]*n_neighbors + x + [x[-1]]*n_neighbors
+    # To complete the function,
+    # return a list of the mean of values from i to i+width for all values i from 0 to n-1.
+    return [sum(x[i:(i+width)]) / width for i in range(n)]
+
+x=[0,10,5,3,1,5]
+print(moving_window_average(x, 1))
+
+
+random.seed(1) # This line fixes the value called by your function,
+# and is used for answer-checking.# write your code here!
+    
+R = 1000
+x = [random.uniform(0, 1) for i in range(0, 1000)] #Return a random floating point number N such that
+   #a <= N <= b for a <= b 
+   #and b <= N <= a for b < a.
+Y = [x] + [moving_window_average(x, n_neighbors) for n_neighbors in range(1, 10)]
+print(len(Y))
+
+print(Y[4][9])
+
+ranges = [max(x)-min(x) for x in Y]
+print(ranges)
